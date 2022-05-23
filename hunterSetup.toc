@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: hunterSetup
+## Notes: Helps hunter players
+## Author: Daniel (Luke @ Wow-Brasil )
+## Version: 0.1
+
+hunterSetup.lua
+hunterSetup.xml
