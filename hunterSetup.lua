@@ -25,6 +25,7 @@ function receiveRegisteredEvent(self, event, ...)
 end
 
 function getActiveAspect()
+    --TODO iterate in possible hunter aspects to get the active one
     local aspectViper = UnitAura("player",hunterAspects[1])
     local aspectDragonhawk = UnitAura("player",hunterAspects[2])
 
@@ -33,5 +34,5 @@ function getActiveAspect()
 end
 
 function changeWindowColor()
-    
+    --TODO implement change window color
 end
