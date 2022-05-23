@@ -3,7 +3,7 @@
 <Frame name="frostward" parent="UIParent">
     <Scripts>
         <OnLoad function="setupAddon"></OnLoad>
-        <OnEvent function="filterEvent"></OnEvent>
+        <OnEvent function="receiveRegisteredEvent"></OnEvent>
     </Scripts>
 </Frame>
 </Ui>
