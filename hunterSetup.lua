@@ -1,13 +1,13 @@
---TODO transform hunterAspects in a key-value with the respective color of aspect
+
 local hunterAspects = {
     ["Aspect of the Viper"]      = "|c003440eb",
     ["Aspect of the Dragonhawk"] = "|c00969696",
-    -- "Aspect of the Beast", --actually idk the utility of show it
-    -- "Aspect of the Cheetah", --actually idk the utility of show it
-    -- "Aspect of the Hawk", --actually idk the utility of show it
-    -- "Aspect of the Monkey", --actually idk the utility of show it
-    -- "Aspect of the Pack", --actually idk the utility of show it
-    -- "Aspect of the Wild" --actually idk the utility of show it
+    -- "Aspect of the Beast",    --actually idk the utility of show it
+    -- "Aspect of the Cheetah",  --actually idk the utility of show it
+    -- "Aspect of the Hawk",     --actually idk the utility of show it
+    -- "Aspect of the Monkey",   --actually idk the utility of show it
+    -- "Aspect of the Pack",     --actually idk the utility of show it
+    -- "Aspect of the Wild"      --actually idk the utility of show it
 }
 
 
@@ -26,8 +26,8 @@ end
 
 function getActiveAspect()
     local activeAspect = nil
-    for key, value in pairs(hunterAspects) do
-        if UnitAura("player", key) ~= nil then activeAspect = key end
+    for aspect, color in pairs(hunterAspects) do
+        if UnitAura("player", aspect) ~= nil then activeAspect = aspect end
     end
     return activeAspect
 end
