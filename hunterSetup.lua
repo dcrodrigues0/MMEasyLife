@@ -1,7 +1,7 @@
 --TODO transform hunterAspects in a key-value with the respective color of aspect
 local hunterAspects = {
-    "Aspect of the Viper",
-    "Aspect of the Dragonhawk",
+    ["Aspect of the Viper"]      = "|c003440eb",
+    ["Aspect of the Dragonhawk"] = "|c00969696",
     -- "Aspect of the Beast", --actually idk the utility of show it
     -- "Aspect of the Cheetah", --actually idk the utility of show it
     -- "Aspect of the Hawk", --actually idk the utility of show it
@@ -25,12 +25,11 @@ function receiveRegisteredEvent(self, event, ...)
 end
 
 function getActiveAspect()
-    --TODO iterate in possible hunter aspects to get the active one
-    local aspectViper = UnitAura("player",hunterAspects[1])
-    local aspectDragonhawk = UnitAura("player",hunterAspects[2])
-
-    if aspectViper ~= nil then return aspectViper end
-    if aspectDragonhawk ~= nil then return aspectDragonhawk end
+    local activeAspect = nil
+    for key, value in pairs(hunterAspects) do
+        if UnitAura("player", key) ~= nil then activeAspect = key end
+    end
+    return activeAspect
 end
 
 function changeWindowColor()
