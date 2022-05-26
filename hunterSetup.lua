@@ -13,15 +13,12 @@ local hunterAspects = {
 
 function setupAddon(self, event, ...) 
     print("|c0003C426(".."hunterSetup successfully loaded"..")")
-    self:RegisterEvent("CURRENT_SPELL_CAST_CHANGED") -- Registering in my frame this event
+    if UnitClass("player") == 'Hunter' then self:RegisterEvent("CURRENT_SPELL_CAST_CHANGED") end -- Registering in my frame this event
 end
 
 function receiveRegisteredEvent(self, event, ...)
     local aspect = getActiveAspect()
-    print(aspect)
-    -- print(UnitAura("player",hunterAspects[1]))
-    -- print(UnitAura("player",hunterAspects[2]))
-    -- print(UnitChannelInfo("player"))
+    changeButtonColor(aspect)
 end
 
 function getActiveAspect()
@@ -32,6 +29,20 @@ function getActiveAspect()
     return activeAspect
 end
 
-function changeWindowColor()
-    --TODO implement change window color
+function changeButtonColor(aspect)
+    -- TODO Improve this verification, use constants    
+    if aspect == "Aspect of the Viper" then createFrameTexture("Aspect of the Dragonhawk") end
+    if aspect == "Aspect of the Dragonhawk" then createFrameTexture("Aspect of the Viper") end
+end
+
+function createFrameTexture(text)
+    -- TODO Change it for a texture to just indicate buff using
+    local btn = CreateFrame("Button", nil, UIParent, "UIPanelButtonTemplate")
+    btn:SetPoint("TOP")
+    btn:SetSize(150, 40)
+    btn:SetText(text)
+    btn:SetScript("OnClick", function(self, button)
+        CastSpellByName(text and "Aspect of the Viper" or "Aspect of the Dragonhawk", true);
+	    print(text and "Aspect of the Viper" or "Aspect of the Dragonhawk" ..button)
+    end)
 end
