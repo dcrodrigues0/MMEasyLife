@@ -1,6 +1,9 @@
+local background = CreateFrame("Frame", "background", UIParent)
+
 local hunterAspects = {
-    ["Aspect_of_the_Viper"]      = "c003440eb",
-    ["Aspect_of_the_Dragonhawk"] = "c00969696"
+    ["Aspect_of_the_Viper"]      = {0,0,1, .2},
+    ["Aspect_of_the_Dragonhawk"] = {0,0,0, .2},
+    ["Aspect_of_the_Pack"]       = {1,1,1, .2}
 }
 
 function replaceDashWithSpace(string)
@@ -20,10 +23,23 @@ function changeWindowColorByAspect()
     for aspect, color in pairs(hunterAspects) do
         if UnitAura("player", replaceDashWithSpace(aspect)) ~= nil then
             changeWindowColor(color)
+            return
+        else
+            changeWindowColor({0,0,0, .0})
         end
     end
 end
 
 function changeWindowColor(color)
-    
+
+    background:SetSize(1920, 1080)
+    background:SetPoint("CENTER")
+
+    background:SetBackdrop({
+        bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
+        edgeFile = "Interface\\ChatFrame\\ChatFrameBackground",
+        edgeSize = 1,
+    })
+    background:SetBackdropColor(color[1], color[2], color[3], color[4])
+
 end
