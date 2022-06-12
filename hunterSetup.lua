@@ -1,18 +1,25 @@
 local background = CreateFrame("Frame", "background", UIParent)
 
 local hunterAspects = {
-    ["Aspect_of_the_Viper"]      = {0,0,1, .2},
-    ["Aspect_of_the_Dragonhawk"] = {0,0,0, .2},
-    ["Aspect_of_the_Pack"]       = {1,1,1, .2}
+    ["Aspect of the Viper"]      = {0,0,1, .2},
+    ["Aspect of the Dragonhawk"] = {0,0,0, .2},
+    ["Aspect of the Pack"]       = {1,1,1, .2}
 }
 
 local eventsToRegister = {
-    "CURRENT_SPELL_CAST_CHANGED", --TODO Use better event to get when the player change aspect
-    "UNIT_SPELLCAST_SENT"
+    "UNIT_AURA"
 } 
 
 function replaceDashWithSpace(string)
     return (string:gsub("_", " "))
+end
+
+function split(string, expression)
+    local splittedlist = {}
+    for i in string.gmatch(string, "([^"..expression.."]+)") do
+        table.insert(splittedlist, i)
+     end
+     return splittedlist
 end
 
 function setupAddon(self, event, ...) 
@@ -24,16 +31,18 @@ function setupAddon(self, event, ...)
 end
 
 function registerNecessaryEvents(self)
-    --TODO there is a bug with this loop and de ocurrence of window colors, resolve it
     for _, event in pairs(eventsToRegister) do
         self:RegisterEvent(event)
     end
 end
 
 function receiveRegisteredEvent(self, event, ...)
-    if event == eventsToRegister[1] then changeWindowColorByActiveAspect() end
-    if event == eventsToRegister[2] then printIfWrongTrackingIsActive() end
     
+    if event == eventsToRegister[1] then 
+        changeWindowColorByActiveAspect() 
+        printIfWrongTrackingIsActive()
+    end
+
 end
 
 function printIfWrongTrackingIsActive()
@@ -43,7 +52,7 @@ end
 
 function changeWindowColorByActiveAspect()
     for aspect, color in pairs(hunterAspects) do
-        if UnitAura("player", replaceDashWithSpace(aspect)) ~= nil then
+        if UnitAura("player", aspect) ~= nil then
             changeWindowColor(color)
             return
         else
@@ -53,9 +62,10 @@ function changeWindowColorByActiveAspect()
 end
 
 function changeWindowColor(color)
-    --TODO GET SCREEN RESOLUTION GetScreenWidth(); TO DEFINE IN SETSIZE
     --TODO IMPROVE THIS "WINDOW CHANGE COLOR" FOR A ANIMATED TEXT IN MIDDLE OF SCREEN
-    background:SetSize(1920, 1080)
+    
+    local resolution = getCurrentlyActiveResolution()
+    background:SetSize(resolution[1], resolution[2])
     background:SetPoint("CENTER")
     background:SetBackdrop({
         bgFile = "Interface\\ChatFrame\\ChatFrameBackground",
@@ -63,4 +73,17 @@ function changeWindowColor(color)
         edgeSize = 1,
     })
     background:SetBackdropColor(color[1], color[2], color[3], color[4])
+end
+
+function printActiveAspect()
+    
+end
+
+function getCurrentlyActiveResolution()
+    local resolutions = {GetScreenResolutions()}
+    for indexResolution, resolution in pairs(resolutions) do
+        if indexResolution == GetCurrentResolution() then 
+            return split(resolution,"x")
+        end
+    end
 end
