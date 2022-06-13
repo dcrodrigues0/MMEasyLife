@@ -1,5 +1,15 @@
 local background = CreateFrame("Frame", "background", UIParent)
 
+local msgFrame = CreateFrame("FRAME", nil, UIParent)
+msgFrame:SetWidth(1)
+msgFrame:SetHeight(1)
+msgFrame:SetPoint("CENTER")
+msgFrame:SetFrameStrata("TOOLTIP")
+msgFrame.text = msgFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+msgFrame.text:SetPoint("CENTER")
+
+local timer = CreateFrame("FRAME");
+
 local hunterAspects = {
     ["Aspect of the Viper"]      = {0,0,1, .2},
     ["Aspect of the Dragonhawk"] = {0,0,0, .2},
@@ -53,17 +63,15 @@ end
 function changeWindowColorByActiveAspect()
     for aspect, color in pairs(hunterAspects) do
         if UnitAura("player", aspect) ~= nil then
-            changeWindowColor(color)
+            changeWindowColor(aspect,color)
             return
         else
-            changeWindowColor({0,0,0, .0})
+            changeWindowColor(aspect,{0,0,0, .0})
         end
     end
 end
 
-function changeWindowColor(color)
-    --TODO IMPROVE THIS "WINDOW CHANGE COLOR" FOR A ANIMATED TEXT IN MIDDLE OF SCREEN
-    
+function changeWindowColor(aspect, color)
     local resolution = getCurrentlyActiveResolution()
     background:SetSize(resolution[1], resolution[2])
     background:SetPoint("CENTER")
@@ -73,10 +81,12 @@ function changeWindowColor(color)
         edgeSize = 1,
     })
     background:SetBackdropColor(color[1], color[2], color[3], color[4])
+    showActiveAspect(aspect)
 end
 
-function printActiveAspect()
-    
+function showActiveAspect(aspect)
+    --TODO ADD SOME TIMER TO ERASE MESSAGE AFTER SOME SECONDS
+    msgFrame.text:SetText(aspect)
 end
 
 function getCurrentlyActiveResolution()
