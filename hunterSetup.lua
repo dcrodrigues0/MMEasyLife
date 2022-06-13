@@ -16,6 +16,17 @@ local hunterAspects = {
     ["Aspect of the Pack"]       = {1,1,1, .2}
 }
 
+local hunterTracks = {
+    "Track Beasts",
+    "Track Demons",
+    "Track Dragonkin",
+    "Track Elementals",
+    "Track Giants",
+    "Track Hidden",
+    "Track Humanoids",
+    "Track Undead"
+}
+
 local eventsToRegister = {
     "UNIT_AURA"
 } 
@@ -47,7 +58,6 @@ function registerNecessaryEvents(self)
 end
 
 function receiveRegisteredEvent(self, event, ...)
-    
     if event == eventsToRegister[1] then 
         changeWindowColorByActiveAspect() 
         printIfWrongTrackingIsActive()
@@ -57,6 +67,8 @@ end
 
 function printIfWrongTrackingIsActive()
     --TODO CREATE THIS FUNCTIONS
+    -- User CreateMacro to use TrackUndead and after it, record changes https://wowwiki-archive.fandom.com/wiki/API_CreateMacro
+    print(UnitBuff("player", "Track Beasts"))
     print(UnitCreatureType("target"))
 end
 
@@ -66,7 +78,7 @@ function changeWindowColorByActiveAspect()
             changeWindowColor(aspect,color)
             return
         else
-            changeWindowColor("No aspect",{0,0,0, .0})
+            changeWindowColor("No aspect",{1,0,0, .2})
         end
     end
 end
