@@ -8,8 +8,6 @@ msgFrame:SetFrameStrata("TOOLTIP")
 msgFrame.text = msgFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 msgFrame.text:SetPoint("TOP")
 
-local timer = CreateFrame("FRAME");
-
 local hunterAspects = {
     ["Aspect of the Viper"]      = {0,0,1, .2},
     ["Aspect of the Dragonhawk"] = {0,0,0, .0},
@@ -17,14 +15,14 @@ local hunterAspects = {
 }
 
 local hunterTracks = {
-    "Track Beasts",
-    "Track Demons",
-    "Track Dragonkin",
-    "Track Elementals",
-    "Track Giants",
-    "Track Hidden",
-    "Track Humanoids",
-    "Track Undead"
+    ["Track Beasts"]       = {"Beast",1},
+    ["Track Demons"]       = {"Demon",2},
+    ["Track Dragonkin"]    = {"Dragonkin",3},
+    ["Track Elementals"]   = {"Elemental",4},
+    ["Track Giants"]       = {"Giant",5},
+    --["Track Hidden"]       {"Hidden",6},
+    ["Track Humanoids"]    = {"Humanoid",7},
+    ["Track Undead"]       = {"Undead",8},
 }
 
 local eventsToRegister = {
@@ -66,10 +64,12 @@ function receiveRegisteredEvent(self, event, ...)
 end
 
 function printIfWrongTrackingIsActive()
-    --TODO CREATE THIS FUNCTIONS
-    -- User CreateMacro to use TrackUndead and after it, record changes https://wowwiki-archive.fandom.com/wiki/API_CreateMacro
-    print(UnitBuff("player", "Track Beasts"))
-    print(UnitCreatureType("target"))
+    for track, creatureType in pairs(hunterTracks) do
+        if(UnitCreatureType("target") == creatureType[1]) then
+            SetTracking(creatureType[2],true);
+            break
+        end    
+    end
 end
 
 function changeWindowColorByActiveAspect()
@@ -78,7 +78,7 @@ function changeWindowColorByActiveAspect()
             changeWindowColor(aspect,color)
             return
         else
-            changeWindowColor("No aspect",{1,0,0, .2})
+            changeWindowColor("No aspect",{1,0,0, .1})
         end
     end
 end
