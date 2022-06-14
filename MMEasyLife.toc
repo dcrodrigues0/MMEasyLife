@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: MMEasyLife
+## Notes: WoW addon that helps MM hunters to put the correct aspect and track Dedicated to @PJL Hunters (Ldeathy, Turok, Vraulisonpjl *Kidnapped by gf*) 
+## Author: Daniel (Luke @ Wow-Brasil )
+## Version: 0.1
+
+MMEasyLife.lua
+MMEasyLife.xml
