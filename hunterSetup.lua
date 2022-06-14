@@ -26,7 +26,8 @@ local hunterTracks = {
 }
 
 local eventsToRegister = {
-    "UNIT_AURA"
+    "UNIT_AURA",
+    "PLAYER_TARGET_CHANGED"
 } 
 
 function replaceDashWithSpace(string)
@@ -44,7 +45,7 @@ end
 function setupAddon(self, event, ...) 
     print("|c0003C426(".."hunterSetup successfully loaded"..")")
     
-    if UnitClass("player") == 'Hunter' then 
+    if UnitClass("player") == 'Hunter' and UnitLevel("player") == 80 then 
         registerNecessaryEvents(self)
     end
 end
@@ -56,14 +57,11 @@ function registerNecessaryEvents(self)
 end
 
 function receiveRegisteredEvent(self, event, ...)
-    if event == eventsToRegister[1] then 
-        changeWindowColorByActiveAspect() 
-        printIfWrongTrackingIsActive()
-    end
-
+    if event == eventsToRegister[1] then changeWindowColorByActiveAspect() end
+    if event == eventsToRegister[2] then changeToCorrectlyTrack() end   
 end
 
-function printIfWrongTrackingIsActive()
+function changeToCorrectlyTrack()
     for track, creatureType in pairs(hunterTracks) do
         if(UnitCreatureType("target") == creatureType[1]) then
             SetTracking(creatureType[2],true);
