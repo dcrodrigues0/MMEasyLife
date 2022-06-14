@@ -8,6 +8,16 @@ msgFrame:SetFrameStrata("TOOLTIP")
 msgFrame.text = msgFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
 msgFrame.text:SetPoint("TOP")
 
+local msgPetInfoFrame = CreateFrame("FRAME", nil, UIParent)
+msgPetInfoFrame:SetWidth(1)
+msgPetInfoFrame:SetHeight(1)
+msgPetInfoFrame:SetPoint("CENTER")
+msgPetInfoFrame:SetFrameStrata("TOOLTIP")
+msgPetInfoFrame.text = msgPetInfoFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+msgPetInfoFrame.text:SetTextColor(1,0,0,1)
+msgPetInfoFrame.text:SetTextHeight(20)
+msgPetInfoFrame.text:SetPoint("CENTER")
+
 local hunterAspects = {
     ["Aspect of the Viper"]      = {0,0,1, .2},
     ["Aspect of the Dragonhawk"] = {0,0,0, .0},
@@ -27,7 +37,8 @@ local hunterTracks = {
 
 local eventsToRegister = {
     "UNIT_AURA",
-    "PLAYER_TARGET_CHANGED"
+    "PLAYER_TARGET_CHANGED",
+    "UNIT_COMBAT"
 } 
 
 function replaceDashWithSpace(string)
@@ -59,6 +70,15 @@ end
 function receiveRegisteredEvent(self, event, ...)
     if event == eventsToRegister[1] then changeWindowColorByActiveAspect() end
     if event == eventsToRegister[2] then changeToCorrectlyTrack() end   
+    if event == eventsToRegister[3] then isPetAlive() end
+end
+
+function isPetAlive()
+    if(UnitExists("pet") ~= 1) then
+        msgPetInfoFrame.text:SetText("NO PET")
+    else
+        msgPetInfoFrame.text:SetText("")
+    end
 end
 
 function changeToCorrectlyTrack()
