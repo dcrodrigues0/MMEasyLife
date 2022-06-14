@@ -6,6 +6,7 @@ msgFrame:SetHeight(1)
 msgFrame:SetPoint("TOP")
 msgFrame:SetFrameStrata("TOOLTIP")
 msgFrame.text = msgFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+msgFrame.text:SetTextHeight(15)
 msgFrame.text:SetPoint("TOP")
 
 local msgPetInfoFrame = CreateFrame("FRAME", nil, UIParent)
@@ -37,8 +38,8 @@ local hunterTracks = {
 
 local eventsToRegister = {
     "UNIT_AURA",
-    "PLAYER_TARGET_CHANGED",
-    "UNIT_COMBAT"
+    "PLAYER_TARGET_CHANGED"
+    --"UNIT_COMBAT"
 } 
 
 function replaceDashWithSpace(string)
@@ -68,13 +69,15 @@ function registerNecessaryEvents(self)
 end
 
 function receiveRegisteredEvent(self, event, ...)
-    if event == eventsToRegister[1] then changeWindowColorByActiveAspect() end
+    if event == eventsToRegister[1] then 
+        changeWindowColorByActiveAspect() 
+        isPetAlive()
+    end
     if event == eventsToRegister[2] then changeToCorrectlyTrack() end   
-    if event == eventsToRegister[3] then isPetAlive() end
 end
 
 function isPetAlive()
-    if(UnitExists("pet") ~= 1) then
+    if(UnitExists("pet") ~= 1 and not IsMounted()) then
         msgPetInfoFrame.text:SetText("NO PET")
     else
         msgPetInfoFrame.text:SetText("")
