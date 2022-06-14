@@ -1,8 +1,0 @@
-## Interface: 30300
-## Title: hunterSetup
-## Notes: WoW addon that helps hunters to put the correct aspect and track
-## Author: Daniel (Luke @ Wow-Brasil )
-## Version: 0.1
-
-hunterSetup.lua
-hunterSetup.xml

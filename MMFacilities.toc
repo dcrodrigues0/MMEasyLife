@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: MMFacilities
+## Notes: WoW addon that helps MM hunters to put the correct aspect and track Dedicated to @PJL Hunters (Ldeathy, Turok, Vraulisonpjl) 
+## Author: Daniel (Luke @ Wow-Brasil )
+## Version: 0.1
+
+MMFacilities.lua
+MMFacilities.xml
