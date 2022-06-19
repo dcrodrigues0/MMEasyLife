@@ -29,9 +29,9 @@ Isn't necessary does any configuration.
 ## FAQ
 
 > <b>Q:</b> There's any interface or slash commands to personalize configurations?</br>
-No, there's no interface or slash commands available yet
+No, there's no interface or slash commands available yet.
 
-> <b>Q:</b> Will this addon steal my account</br>
+> <b>Q:</b> Will this addon steal my account?</br>
 No, of course no, was just made for help and can't make nothing to steal accounts.
 
 > <b>Q:</b> There's some possibility to get banned after using it?</br>
