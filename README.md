@@ -8,7 +8,8 @@ This addon is made for help MM(Marksmanship) hunters, will explicit the active a
 [How it works](#how-it-works) •
 [Installation](#installation) •
 [Configuration](#configuration) •
-[FAQ](#faq)
+[FAQ](#faq) •
+[LICENSE](#license)  
 
 </div>
 
@@ -36,3 +37,6 @@ No, of course no, was just made for help and can't make nothing to steal account
 
 > <b>Q:</b> There's some possibility to get banned after using it?</br>
 No, this addon only use Blizzard <a href="https://wowpedia.fandom.com/wiki/World_of_Warcraft_API">WoW API</a> functions.
+
+## License
+You can read license terms <a href="https://github.com/dcrodrigues0/MMEasyLife/blob/main/LICENSE">here</a>
