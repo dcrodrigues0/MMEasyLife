@@ -19,8 +19,8 @@ Explicit active aspect(Pack, Viper or Dragonhawk).</br>
 Everything was built using Blizzard <a href="https://wowpedia.fandom.com/wiki/World_of_Warcraft_API">WoW API</a>.</br>
 
 ## Installation
-You can download the lastest version by <a href="!#">clicking here.</a></br>
-if you want to download different addon version, you can access release page <a href="!#">here</a>.</br>
+You can download the lastest version by <a href="https://github.com/dcrodrigues0/MMEasyLife/releases/download/v1.0.0-beta/MMEasyLife.zip">clicking here.</a></br>
+if you want to download different addon version, you can access release page <a href="https://github.com/dcrodrigues0/MMEasyLife/releases">here</a>.</br>
 after just unzip the file and paste in your wow addon folder, commonly in (yourWoWDirectory\Interface\AddOns)
 
 ## Configuration
