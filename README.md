@@ -24,7 +24,7 @@ if you want to download different addon version, you can access release page <a 
 after just unzip the file and paste in your wow addon folder, commonly in (yourWoWDirectory\Interface\AddOns)
 
 ## Configuration
-Isn't necessary does any configuration.
+It is not necessary to do any configuration.
 
 ## FAQ
 
